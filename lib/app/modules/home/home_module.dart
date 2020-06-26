@@ -8,7 +8,7 @@ class HomeModule extends ChildModule{
   @override
   // TODO: implement binds
   List<Bind> get binds => [
-    Bind((i) => HomeController(i.get<PokeRepository>())),
+    Bind((i) => HomeController()),
     Bind((i) => PokeRepository(i.get<Dio>())),
   ];
 
@@ -17,5 +17,7 @@ class HomeModule extends ChildModule{
   List<Router> get routers => [
     Router('/', child: (_,args) => HomePage())
   ];
+
+  static Inject get to => Inject.of();
 
 }

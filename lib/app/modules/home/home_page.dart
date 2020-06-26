@@ -2,28 +2,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:slidytest/app/modules/home/components/item/item_widget.dart';
 
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
+  final String title;
+  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ModularState<HomePage, HomeController> {
 
-  final homeController = Modular.get<HomeController>();
+ // final homeController = Modular.get<HomeController>();
   //Counter counter = Counter();
+
+  final HomeController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Titulo"),
+        title: TextField(
+          onChanged: controller.setText,
+        ),
+        actions: <Widget>[
+          Observer(
+              builder: (_){
+                return IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: controller.text.isEmpty ? null : controller.save,
+                );
+              }
+          )
+        ],
       ),
       body: Observer(
-          builder: (_){
-            if(homeController.pokemons.error != null){
+          builder: (_) {
+            return ListView.builder(
+                itemCount: controller.list.length,
+                itemBuilder: (_, index){
+                  return ItemWidget(index: index,);
+                }
+            );
+
+            /*if(homeController.pokemons.error != null){
               return Center(
                 child: RaisedButton(
                 child: Text('Tente Novamente'),
@@ -52,9 +77,9 @@ class _HomePageState extends State<HomePage> {
             );
 
           }
-      ),
+      ),*/
 
-      /*Center(
+            /*Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -75,6 +100,8 @@ class _HomePageState extends State<HomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),*/ // This trailing comma makes auto-formatting nicer for build methods.
+          }
+      )
     );
   }
 }
