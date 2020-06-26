@@ -1,10 +1,10 @@
 # slidytest
 
-A new Flutter project.
+Aprendendo conceitos de consumo de APIs e persistencia de dados utilizando Modular + MobX + Slidy
 
 # Screenshot
 
-![screenshot](https://github.com/OrlandoEduardo101/whatsflutter/blob/master/assets/screenshot-2020-06-15_19.20.00.682.png?raw=true)
+![screenshot](https://github.com/OrlandoEduardo101/slidytest/blob/master/screenshot-2020-06-15_19.23.11.786.png?raw=true)
 
 ## Getting Started
 
